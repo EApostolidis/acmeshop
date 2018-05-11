@@ -8,5 +8,5 @@ public class Product {
     private long id;
     private String name;
     private Category category;
-    private int quantiry;
+    private int quantity;
 }
