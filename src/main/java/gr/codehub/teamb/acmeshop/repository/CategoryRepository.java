@@ -1,4 +1,8 @@
 package gr.codehub.teamb.acmeshop.repository;
 
-public class CategoryRepository {
+import gr.codehub.teamb.acmeshop.domain.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    Category getCategoriesById(Long id);
 }
