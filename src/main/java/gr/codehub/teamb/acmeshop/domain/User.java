@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -12,6 +13,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private long id;
 
     private String username;
@@ -22,4 +24,7 @@ public class User {
     private Role role;
 
     private String token;
+
+    @OneToMany(mappedBy = "id")
+    private Set<Order> orders;
 }

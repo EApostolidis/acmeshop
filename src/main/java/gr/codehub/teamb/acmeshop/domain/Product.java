@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -12,6 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROD_ID")
     private long id;
     private String name;
     @ManyToOne
@@ -19,4 +21,7 @@ public class Product {
     @JsonIgnore
     private Category category;
     private int quantity;
+
+    @ManyToMany(mappedBy="products",fetch=FetchType.EAGER)
+    private Set<Order> orders;
 }
