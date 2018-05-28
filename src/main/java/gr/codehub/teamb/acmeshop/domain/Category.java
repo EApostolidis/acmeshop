@@ -1,5 +1,6 @@
 package gr.codehub.teamb.acmeshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Category {
     private long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Product> products;
 }

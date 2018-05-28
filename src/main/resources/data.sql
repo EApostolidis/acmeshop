@@ -8,6 +8,6 @@ insert into categories (name, description) values ('GPU', 'GPU category');
 insert into categories (name, description) values ('Cases', 'cases category');
 insert into categories (name, description) values ('PSU', 'PSU category');
 
-insert into products (name, category_id, quantity) values ('Intel i5 8600K', 2, 50);
-insert into products (name, category_id, quantity) values ('Intel i5 8400', 2, 50);
-insert into products (name, category_id, quantity) values ('Asus GTX 1080Ti', 5, 50);
+insert into products (name, category_id) values ('Intel i5 8600K', 2);
+insert into products (name, category_id) values ('Intel i5 8400', 2);
+insert into products (name, category_id) values ('Asus GTX 1080Ti', 5);

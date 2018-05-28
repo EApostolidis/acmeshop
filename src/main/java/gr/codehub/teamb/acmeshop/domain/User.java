@@ -1,5 +1,6 @@
 package gr.codehub.teamb.acmeshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.codehub.teamb.acmeshop.enums.Role;
 import lombok.Data;
 import org.springframework.data.annotation.ReadOnlyProperty;
@@ -21,5 +22,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private String token;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Cart cart;
 }

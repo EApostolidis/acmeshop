@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,5 +19,7 @@ public class Product {
     @JoinColumn(name = "CATEGORY_ID")
     @JsonIgnore
     private Category category;
-    private int quantity;
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Cart> carts;
 }

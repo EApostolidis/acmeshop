@@ -8,30 +8,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/acmeshop/api")
+@RequestMapping("/acmeshop")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/user")
+    @PostMapping(value = "/users")
     public ResponseEntity<User> getUser(@RequestBody User user) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.createUser(user));
     }
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity
                 .ok()
                 .body(userService.getUserById(id));
     }
 
-    @PostMapping(value = "/user/login")
-    public ResponseEntity<User> userLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password){
+    @PostMapping(value = "/users/login")
+    public ResponseEntity<User> userLogin(@RequestBody User user){
         return ResponseEntity
                 .ok()
-                .body(userService.userLogin(username, password));
+                .body(userService.userLogin(user));
     }
 }

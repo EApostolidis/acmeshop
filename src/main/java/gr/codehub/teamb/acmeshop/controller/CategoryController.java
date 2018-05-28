@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/acmeshop/api")
+@RequestMapping("/acmeshop")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping(value = "/category")
+    @GetMapping(value = "/categories")
     public ResponseEntity<List<Category>> getAllCategories() {
         return ResponseEntity
                 .ok()
                 .body(categoryService.getAllCategories());
     }
 
-    @GetMapping(value = "/category/{id}")
+    @GetMapping(value = "/categories/{id}")
     public ResponseEntity<Category> getCatehoryById(@PathVariable Long id) {
         return ResponseEntity
                 .ok()
-                .body(categoryService.getCatgoryById(id));
+                .body(categoryService.getCategoryById(id));
     }
 }
