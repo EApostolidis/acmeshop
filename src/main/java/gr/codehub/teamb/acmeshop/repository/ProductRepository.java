@@ -11,4 +11,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products p WHERE UPPER(p.name) LIKE UPPER('%'||?1||'%')", nativeQuery = true)
     List<Product> findProductsByText(String text);
     List<Product> findAllByCategory(Category category);
+    Product findProductById(Long id);
 }

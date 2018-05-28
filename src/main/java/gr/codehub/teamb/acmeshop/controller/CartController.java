@@ -4,10 +4,7 @@ import gr.codehub.teamb.acmeshop.domain.Cart;
 import gr.codehub.teamb.acmeshop.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/acmeshop")
@@ -20,5 +17,26 @@ public class CartController {
         return ResponseEntity
                 .ok()
                 .body(cartService.getCartByUser(id));
+    }
+
+    @PostMapping(value = "/carts/user/{userId}/product/{productId}")
+    public ResponseEntity<Cart> addProduct(@PathVariable Long userId, @PathVariable Long productId) {
+        return ResponseEntity
+                .ok()
+                .body(cartService.addProduct(userId, productId));
+    }
+
+    @DeleteMapping(value = "/carts/user/{userId}/product/{productId}")
+    public ResponseEntity<Cart> removeProduct(@PathVariable Long userId, @PathVariable Long productId) {
+        return ResponseEntity
+                .ok()
+                .body(cartService.removeProduct(userId, productId));
+    }
+
+    @DeleteMapping(value = "/carts/user/{userId}/clear")
+    public ResponseEntity<Cart> clearCart(@PathVariable Long userId) {
+        return ResponseEntity
+                .ok()
+                .body(cartService.clearCart(userId));
     }
 }
