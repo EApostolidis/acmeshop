@@ -14,14 +14,18 @@ public class Order {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-
+    @ManyToMany
+    @JoinTable(name = "ORDER_PRODUCTS",
+            joinColumns = @JoinColumn(name = "ORDER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products;
 
     public Order() {
     }
 
-    public Order(User user) {
+    public Order(User user, Set<Product> products) {
         this.user = user;
+        this.products = products;
     }
 
     public long getId() {
@@ -38,5 +42,13 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

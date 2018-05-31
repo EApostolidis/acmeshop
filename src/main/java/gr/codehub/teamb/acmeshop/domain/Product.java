@@ -22,6 +22,10 @@ public class Product {
     @JsonIgnore
     private Set<Cart> carts;
 
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    private Set<Order> orders;
+
     public Product() {
     }
 
