@@ -11,17 +11,17 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "CATEGORIES")
-public class Category implements Serializable {
+@Table(name = "STOCKS")
+public class Stock implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    @Column(name = "STOCK_ID")
+    private long id;
 
-    private String description;
+    @OneToOne
+    @JoinColumn(name="PROD_ID")
+    private Product product;
 
-    @OneToMany(mappedBy = "category",fetch=FetchType.LAZY)
-    @JsonIgnore
-    private Set<Product> products;
+    private int quantity;
 }

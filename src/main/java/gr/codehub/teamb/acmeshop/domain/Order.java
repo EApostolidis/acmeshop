@@ -1,32 +1,36 @@
 package gr.codehub.teamb.acmeshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
-    private long id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    @JsonIgnore
+    @JsonBackReference
     private User user;
 
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="OERDER_PRODUCTS", joinColumns=
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name="ORDER_PRODUCTS", joinColumns=
     @JoinColumn(name="ORDER_ID",
             referencedColumnName="ORDER_ID"),
             inverseJoinColumns=
             @JoinColumn(name="PROD_ID",
                     referencedColumnName="PROD_ID") )
-    private Set<Product> products;
+    private List<Product> products;
 }
