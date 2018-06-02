@@ -28,4 +28,11 @@ public class ProductController {
                 .ok()
                 .body(productService.getProductsByCategory(categoryId));
     }
+
+    @PostMapping("/products/{categoryId}")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product,@PathVariable Long categoryId) {
+        return ResponseEntity
+                .ok()
+                .body(productService.createProduct(product,categoryId));
+    }
 }

@@ -13,9 +13,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
-    @JsonIgnore
     private Category category;
 
     @ManyToMany(mappedBy = "products")

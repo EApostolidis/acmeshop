@@ -20,14 +20,14 @@ public class StockController {
                 .body(stockService.getStockbyId(id));
     }
 
-    @PostMapping("/stocks/{product_id}/{quantity}")
+    @PostMapping("/stocks/{product_id}/quantity/{quantity}")
     public ResponseEntity<Stock> saveStock(@PathVariable Long product_id ,@PathVariable int quantity ){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(stockService.addStock(product_id,quantity));
     }
 
-    @PutMapping("/stocks/{id}/{quantity}")
+    @PutMapping("/stocks/{id}/quantity/{quantity}")
     public ResponseEntity<Stock> updateStock(@PathVariable Long id ,@PathVariable int quantity){
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)

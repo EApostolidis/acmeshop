@@ -9,5 +9,9 @@ insert into categories (name, description) values ('Cases', 'cases category');
 insert into categories (name, description) values ('PSU', 'PSU category');
 
 insert into products (name, category_id, quantity) values ('Intel i5 8600K', 2 ,1);
-insert into products (name, category_id, quantity) values ('Intel i5 8400', 2 , 2);
-insert into products (name, category_id, quantity) values ('Asus GTX 1080Ti', 5 , 3);
+insert into products (name, category_id, quantity) values ('Intel i5 8400', 2 , 1);
+insert into products (name, category_id, quantity) values ('Asus GTX 1080Ti', 5 , 1);
+
+insert into stocks  (prod_id, quantity) values (1, 5);
+insert into stocks  (prod_id, quantity) values (2, 3);
+insert into stocks  (prod_id, quantity) values (3, 2);

@@ -2,9 +2,11 @@ package gr.codehub.teamb.acmeshop.service;
 
 import gr.codehub.teamb.acmeshop.domain.Cart;
 import gr.codehub.teamb.acmeshop.domain.Product;
+import gr.codehub.teamb.acmeshop.domain.Stock;
 import gr.codehub.teamb.acmeshop.domain.User;
 import gr.codehub.teamb.acmeshop.repository.CartRepository;
 import gr.codehub.teamb.acmeshop.repository.ProductRepository;
+import gr.codehub.teamb.acmeshop.repository.StockRepository;
 import gr.codehub.teamb.acmeshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,9 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private StockRepository stockRepository;
+
     @Override
     public Cart createCart(User user) {
         Cart cart = new Cart();
@@ -43,19 +48,31 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart addProduct(Long userId, Long productId) {
+    public Cart addProduct(Long userId, Long productId , int quantity) {
         Cart cart = getCartByUser(userId);
         Product product = productRepository.findProductById(productId);
-        if(cart.getProducts().isEmpty()){
-            Set<Product> products = new HashSet<>();
-            cart.setProducts(products);
-            cart.getProducts().add(product);
-            log.info("something");
+        product.setQuantity(quantity);
+        Stock stock = stockRepository.getStockByProductId(productId);
+        Set<Product> products = new HashSet<>();
+        if(product.getQuantity()<= stock.getQuantity()){
+            stock.setQuantity(stock.getQuantity() - product.getQuantity());
+            if(cart.getProducts().isEmpty()) {
+                cart.setProducts(products);
+                cart.getProducts().add(product);
+                cartRepository.save(cart);
+                stockRepository.save(stock);
+                log.info("Stock and cart saved");
+                return cart;
+            }else{
+                cart.getProducts().add(product);
+                stockRepository.save(stock);
+                cartRepository.save(cart);
+                log.info("Stock and cart saved");
+                return cart;
+            }
         }else {
-            cart.getProducts().add(product);
+            return null;
         }
-        cartRepository.save(cart);
-        return cartRepository.findCartByUser(userRepository.findUserById(userId));
     }
 
     @Override

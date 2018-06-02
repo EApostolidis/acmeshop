@@ -19,11 +19,11 @@ public class CartController {
                 .body(cartService.getCartByUser(id));
     }
 
-    @PostMapping(value = "/carts/user/{userId}/product/{productId}")
-    public ResponseEntity<Cart> addProduct(@PathVariable Long userId, @PathVariable Long productId) {
+    @PostMapping(value = "/carts/user/{userId}/product/{productId}/quantity/{quantity}")
+    public ResponseEntity<Cart> addProduct(@PathVariable Long userId, @PathVariable Long productId,@PathVariable Integer quantity) {
         return ResponseEntity
                 .ok()
-                .body(cartService.addProduct(userId, productId));
+                .body(cartService.addProduct(userId, productId,quantity));
     }
 
     @DeleteMapping(value = "/carts/user/{userId}/product/{productId}")
