@@ -412,6 +412,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "reports/user/orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/acmeshop/reports/user/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"acmeshop",
+						"reports",
+						"user",
+						"orders"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
