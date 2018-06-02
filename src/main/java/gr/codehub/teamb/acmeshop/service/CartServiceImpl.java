@@ -9,8 +9,17 @@ import gr.codehub.teamb.acmeshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Logger;
+
+import static com.sun.webkit.perf.WCFontPerfLogger.log;
+
 @Service
 public class CartServiceImpl implements CartService {
+
+    static Logger log = Logger.getLogger(CartServiceImpl.class.getName());
+
     @Autowired
     private CartRepository cartRepository;
 
@@ -37,7 +46,14 @@ public class CartServiceImpl implements CartService {
     public Cart addProduct(Long userId, Long productId) {
         Cart cart = getCartByUser(userId);
         Product product = productRepository.findProductById(productId);
-        cart.getProducts().add(product);
+        if(cart.getProducts().isEmpty()){
+            Set<Product> products = new HashSet<>();
+            cart.setProducts(products);
+            cart.getProducts().add(product);
+            log.info("something");
+        }else {
+            cart.getProducts().add(product);
+        }
         cartRepository.save(cart);
         return cartRepository.findCartByUser(userRepository.findUserById(userId));
     }

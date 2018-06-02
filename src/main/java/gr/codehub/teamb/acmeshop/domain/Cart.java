@@ -48,9 +48,7 @@ public class Cart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
+    public Set<Product> getProducts() { return products; }
 
     public void setProducts(Set<Product> products) {
         this.products = products;
