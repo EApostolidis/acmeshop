@@ -26,6 +26,9 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private Set<Order> orders;
 
+    private int quantity;
+
+
     public Product() {
     }
 
@@ -65,5 +68,13 @@ public class Product {
 
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
