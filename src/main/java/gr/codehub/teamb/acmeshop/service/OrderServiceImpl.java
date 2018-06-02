@@ -38,4 +38,10 @@ public class OrderServiceImpl implements OrderService {
         cartService.clearCart(userId);
         return order;
     }
+
+    @Override
+    public Set<Order> getUserOrders(Long id) {
+        User user = userService.getUserById(id);
+        return orderRepository.findAllByUser(user);
+    }
 }

@@ -13,7 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByCategory(Category category);
     Product findProductById(Long id);
 
-    @Query(value = "SELECT * FROM order_products GROUP BY order_id ORDER BY order_id DESC ", nativeQuery = true)
+    @Query(value = "select top 10 * from products where id in (select product_id from order_products where product_id group by product_id order by count(*) desc)", nativeQuery = true)
     List<Product> mostPurchsedProduct();
 
 }
