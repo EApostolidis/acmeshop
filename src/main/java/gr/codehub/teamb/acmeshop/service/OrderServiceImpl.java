@@ -31,13 +31,9 @@ public class OrderServiceImpl implements OrderService {
         User user =  userService.getUserById(userId);
         Order order = new Order();
         order.setUser(user);
- //       if(order.getProducts().isEmpty()){
-            Set<Product> productSet = new HashSet<>();
-            productSet.addAll(cart.getProducts());
-            order.setProducts(productSet);
- //       }else{
- //           order.getProducts().addAll(cart.getProducts());
- //       }
+        Set<Product> productSet = new HashSet<>();
+        productSet.addAll(cart.getProducts());
+        order.setProducts(productSet);
         orderRepository.save(order);
         cartService.clearCart(userId);
         return order;
