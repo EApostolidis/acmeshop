@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface UserService {
     User createUser(User user);
     User getUserById(Long id);
-    User userLogin(User user);
+    User userLogin(String token);
 }

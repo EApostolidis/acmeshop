@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findUserById(Long id);
     User findUserByUsernameAndPassword(String username, String password);
+    User findUserByToken(String token);
 
     @Query(value = "select * from users where id in (select user_id from orders group by user_id order by count(*) desc)", nativeQuery = true)
     List<User> listOfUsersWithOrders();

@@ -28,10 +28,10 @@ public class UserController {
                 .body(userService.getUserById(id));
     }
 
-    @PostMapping(value = "/users/login")
-    public ResponseEntity<User> userLogin(@RequestBody User user){
+    @GetMapping(value = "/users/login")
+    public ResponseEntity<User> userLogin(@RequestParam(value = "token") String token){
         return ResponseEntity
                 .ok()
-                .body(userService.userLogin(user));
+                .body(userService.userLogin(token));
     }
 }

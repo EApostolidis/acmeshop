@@ -22,6 +22,8 @@ public class User {
     @Email
     private String email;
 
+    private String token;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -98,5 +100,13 @@ public class User {
 
     public void setOrder(Set<Order> order) {
         this.order = order;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
