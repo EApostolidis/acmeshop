@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    static Logger log = Logger.getLogger(OrderServiceImpl.class.getName());
 
     @Autowired
     private OrderRepository orderRepository;
@@ -36,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
         order.setProducts(productSet);
         orderRepository.save(order);
         cartService.clearCart(userId);
+        log.info("order " + order + "has been saved ");
         return order;
     }
 

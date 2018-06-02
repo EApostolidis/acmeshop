@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    static Logger log = Logger.getLogger(UserServiceImpl.class.getName());
 
     private static final int TOKEN_SIZE = 10;
 
@@ -28,6 +31,7 @@ public class UserServiceImpl implements UserService {
         user.setCart(cartService.createCart(user));
         user.setToken(RandomStringUtils.randomAlphabetic(TOKEN_SIZE));
         userRepository.save(user);
+        log.info("user" + user  + "has been saved");
         return userRepository.findUserById(user.getId());
     }
 

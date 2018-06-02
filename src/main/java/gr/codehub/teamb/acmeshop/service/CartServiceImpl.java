@@ -38,6 +38,7 @@ public class CartServiceImpl implements CartService {
     public Cart createCart(User user) {
         Cart cart = new Cart();
         cart.setUser(user);
+        log.info("order " + user + "has been saved ");
         return cartRepository.save(cart);
     }
 
@@ -80,6 +81,7 @@ public class CartServiceImpl implements CartService {
         Cart cart = getCartByUser(userId);
         Product product = productRepository.findProductById(productId);
         cart.getProducts().remove(product);
+        log.info("Product  removed");
         return cartRepository.save(cart);
     }
 

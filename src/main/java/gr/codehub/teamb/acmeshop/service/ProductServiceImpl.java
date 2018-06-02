@@ -12,10 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-@Slf4j
+
 @Service
 public class ProductServiceImpl implements ProductService {
+
+    static Logger log = Logger.getLogger(ProductServiceImpl.class.getName());
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -43,6 +47,8 @@ public class ProductServiceImpl implements ProductService {
         Stock stock = new Stock();
         stock.setProduct(product);
         stock.setQuantity(1);
+        stockRepository.save(stock);
+        log.info("product " + product + "has been saved " +" stock "+ stock + " has been saved");
         return product;
     }
 }

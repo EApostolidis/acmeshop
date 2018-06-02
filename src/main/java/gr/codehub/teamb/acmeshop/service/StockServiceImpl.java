@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.logging.Logger;
+
 @Service
 @Transactional
 public class StockServiceImpl implements StockService{
+
+    static Logger log = Logger.getLogger(StockServiceImpl.class.getName());
 
     @Autowired
     StockRepository stockRepository;
@@ -25,6 +29,7 @@ public class StockServiceImpl implements StockService{
         stock.setProduct(product);
         stock.setQuantity(quantity);
         stockRepository.save(stock);
+        log.info("stock for" + stock + "has been saved");
         return stock;
     }
 
@@ -38,6 +43,7 @@ public class StockServiceImpl implements StockService{
         Stock stock = stockRepository.getStockByProductId(id);
         stock.setQuantity(quantity);
         stockRepository.save(stock);
+        log.info("stock for" + stock + "has been updated");
         return stock;
     }
 }
