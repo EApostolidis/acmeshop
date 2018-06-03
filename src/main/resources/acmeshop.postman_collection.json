@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dcc31515-6392-4a59-bc90-4d6ee77011c4",
+		"_postman_id": "62141ea0-6483-427d-9449-b5ee672d1bb4",
 		"name": "acmeshop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,18 +17,19 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"parisk85\",\n\t\"password\": \"parisk85\",\n\t\"email\": \"parisk85@gmail.com\",\n\t\"role\": \"ADMIN\"\n}"
+					"raw": "{\n\t\"username\": \"parisk85\",\n\t\"password\": \"parisk85\",\n\t\"email\": \"parisk85@gmail.com\",\n\t\"role\": \"USER\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/users",
+					"raw": "http://localhost:8070/acmeshop/users/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
-						"users"
+						"users",
+						""
 					]
 				}
 			},
@@ -44,16 +45,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/users/1",
+					"raw": "http://localhost:8070/acmeshop/users/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"users",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -62,7 +63,7 @@
 		{
 			"name": "users/login",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -74,12 +75,12 @@
 					"raw": "{\n\t\"username\": \"paris\",\n\t\"password\": \"paris\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/users/login?",
+					"raw": "http://localhost:8070/acmeshop/users/login?token=nFEEtgUaGz",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"users",
@@ -87,9 +88,8 @@
 					],
 					"query": [
 						{
-							"key": "username",
-							"value": "paris",
-							"disabled": true
+							"key": "token",
+							"value": "nFEEtgUaGz"
 						},
 						{
 							"key": "password",
@@ -111,12 +111,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/products?text=i5",
+					"raw": "http://localhost:8070/acmeshop/products?text=i5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"products"
@@ -141,12 +141,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/categories",
+					"raw": "http://localhost:8070/acmeshop/categories",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"categories"
@@ -165,16 +165,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/categories/2",
+					"raw": "http://localhost:8070/acmeshop/categories/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"categories",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -190,12 +190,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/products/category/2?",
+					"raw": "http://localhost:8070/acmeshop/products/category/2?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"products",
@@ -223,12 +223,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/carts/user/2",
+					"raw": "http://localhost:8070/acmeshop/carts/user/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"carts",
@@ -244,21 +244,30 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/carts/user/2/product/2",
+					"raw": "http://localhost:8070/acmeshop/carts/product/2/quantity/1?token=gNWPfRFBZw",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"carts",
-						"user",
-						"2",
 						"product",
-						"2"
+						"2",
+						"quantity",
+						"1"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "gNWPfRFBZw"
+						}
 					]
 				}
 			},
@@ -274,19 +283,23 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/carts/user/2/product/1",
+					"raw": "http://localhost:8070/acmeshop/carts/product/2?token=ZkJZVAwsJp",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"carts",
-						"user",
-						"2",
 						"product",
-						"1"
+						"2"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "ZkJZVAwsJp"
+						}
 					]
 				}
 			},
@@ -302,7 +315,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/carts/user/2/clear",
+					"raw": "http://localhost:8080/acmeshop/carts/clear?token",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -311,9 +324,13 @@
 					"path": [
 						"acmeshop",
 						"carts",
-						"user",
-						"2",
 						"clear"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": null
+						}
 					]
 				}
 			},
@@ -329,63 +346,105 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/orders/user/2",
+					"raw": "http://localhost:8070/acmeshop/orders/confirm?token=ZkJZVAwsJp",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"orders",
-						"user",
-						"2"
+						"confirm"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "ZkJZVAwsJp"
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "orders/user/2",
+			"name": "products/{}",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"something\"\n}"
+				},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/orders/user/2",
+					"raw": "http://localhost:8070/acmeshop/products/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
-						"orders",
-						"user",
+						"products",
 						"2"
+					]
+				},
+				"description": "products/{}"
+			},
+			"response": []
+		},
+		{
+			"name": "products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8070/acmeshop/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"acmeshop",
+						"products"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "reports/most/purchased",
+			"name": "stocks/{}/{}",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/reports/most/purchased",
+					"raw": "http://localhost:8070/acmeshop/stocks/2/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
-						"reports",
-						"most",
-						"purchased"
+						"stocks",
+						"2",
+						"5"
 					]
 				}
 			},
@@ -398,12 +457,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/reports/orders",
+					"raw": "http://localhost:8070/acmeshop/reports/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"reports",
@@ -414,23 +473,123 @@
 			"response": []
 		},
 		{
-			"name": "reports/user/orders",
+			"name": "user/orders",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/acmeshop/reports/user/orders",
+					"raw": "http://localhost:8070/acmeshop/reports/user/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8070",
 					"path": [
 						"acmeshop",
 						"reports",
 						"user",
 						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carts/product/1?token=",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8070/acmeshop/carts/product/2?token=ZkJZVAwsJp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"acmeshop",
+						"carts",
+						"product",
+						"2"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "ZkJZVAwsJp"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carts/product/2?token?",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8070/acmeshop/carts/product/1/quantity/1?token=ZkJZVAwsJp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"acmeshop",
+						"carts",
+						"product",
+						"1",
+						"quantity",
+						"1"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "ZkJZVAwsJp"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carts/product/2?token=",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8070/acmeshop/carts/product/2/quantity/1?token=gNWPfRFBZw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"acmeshop",
+						"carts",
+						"product",
+						"2",
+						"quantity",
+						"1"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "gNWPfRFBZw"
+						}
 					]
 				}
 			},
