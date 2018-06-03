@@ -1,15 +1,7 @@
 package gr.codehub.teamb.acmeshop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 
-<<<<<<< HEAD
-import java.io.Serializable;
-import java.util.List;
-
-@Data
-public class Cart implements Serializable {
-=======
 import javax.persistence.*;
 import java.util.Set;
 
@@ -19,7 +11,6 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
->>>>>>> development
 
     @OneToOne
     @JoinColumn(name = "USER_ID")
@@ -28,8 +19,8 @@ public class Cart {
 
     @ManyToMany
     @JoinTable(name = "CART_PRODUCTS",
-        joinColumns = @JoinColumn(name = "CART_ID"),
-        inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+            joinColumns = @JoinColumn(name = "CART_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
     private Set<Product> products;
 
     public Cart() {
@@ -56,7 +47,9 @@ public class Cart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() { return products; }
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     public void setProducts(Set<Product> products) {
         this.products = products;
