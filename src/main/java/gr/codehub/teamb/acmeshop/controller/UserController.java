@@ -42,11 +42,11 @@ public class UserController {
                 .body(user);
     }
 
-    @GetMapping(value = "/users/login")
-    public ResponseEntity<User> userLogin(@RequestParam(value = "token") String token){
+    @PostMapping(value = "/users/login")
+    public ResponseEntity<User> userLogin(@RequestBody User user){
         return ResponseEntity
                 .ok()
-                .body(userService.userLogin(token));
+                .body(userService.userLogin(user));
     }
 
     @GetMapping(value = "/users")

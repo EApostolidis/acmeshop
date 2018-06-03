@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User createUser(User user) {
         user.setCart(cartService.createCart(user));
-        user.setToken(RandomStringUtils.randomAlphabetic(TOKEN_SIZE));
+        //user.setToken(RandomStringUtils.randomAlphabetic(TOKEN_SIZE));
+        user.setToken(null);
         userRepository.save(user);
         log.info("user" + user  + "has been saved");
         return userRepository.findUserById(user.getId());
@@ -41,8 +42,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User userLogin(String token) {
-        return userRepository.findUserByToken(token);
+    public User userLogin(User user) {
+        User tmpUser = userRepository.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+        if (tmpUser != null) {
+            tmpUser.setToken(RandomStringUtils.randomAlphabetic(TOKEN_SIZE));
+            userRepository.save(tmpUser);
+            return userRepository.findUserById(tmpUser.getId());
+        }
+        return user;
     }
 
     @Override
