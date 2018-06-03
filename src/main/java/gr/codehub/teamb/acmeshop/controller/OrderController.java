@@ -20,13 +20,12 @@ public class OrderController {
     @Autowired
     private Authenticate authenticate;
 
-    @PostMapping(value = "/orders/user/{id}")
-    public ResponseEntity<Order> confirmOrder(@PathVariable Long id,
-                                              @RequestParam(value = "token") String token) {
+    @PostMapping(value = "/orders/confirm")
+    public ResponseEntity<Order> confirmOrder(@RequestParam(value = "token") String token) {
         if(authenticate.Authenticate(token)) {
             return ResponseEntity
                     .ok()
-                    .body(orderService.confirmOrder(id));
+                    .body(orderService.confirmOrder(token));
         }else{
             return ResponseEntity
                     .status(UNAUTHORIZED)

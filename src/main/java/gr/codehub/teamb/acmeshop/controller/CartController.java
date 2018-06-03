@@ -25,15 +25,14 @@ public class CartController {
                 .body(cartService.getCartByUser(id));
     }
 
-    @PostMapping(value = "/carts/user/{userId}/product/{productId}/quantity/{quantity}")
-    public ResponseEntity<Cart> addProduct(@PathVariable Long userId,
-                                           @PathVariable Long productId,
+    @PostMapping(value = "/carts/product/{productId}/quantity/{quantity}")
+    public ResponseEntity<Cart> addProduct(@PathVariable Long productId,
                                            @PathVariable Integer quantity,
                                            @RequestParam(value = "token") String token){
         if(authenticate.Authenticate(token)) {
             return ResponseEntity
                     .ok()
-                    .body(cartService.addProduct(userId, productId, quantity));
+                    .body(cartService.addProduct(token, productId, quantity));
         }else{
             return ResponseEntity
                     .status(UNAUTHORIZED)
@@ -41,14 +40,13 @@ public class CartController {
         }
     }
 
-    @DeleteMapping(value = "/carts/user/{userId}/product/{productId}")
-    public ResponseEntity<Cart> removeProduct(@PathVariable Long userId,
-                                              @PathVariable Long productId,
+    @DeleteMapping(value = "/carts/product/{productId}")
+    public ResponseEntity<Cart> removeProduct(@PathVariable Long productId,
                                               @RequestParam(value = "token") String token){
         if(authenticate.Authenticate(token)) {
             return ResponseEntity
                     .ok()
-                    .body(cartService.removeProduct(userId, productId));
+                    .body(cartService.removeProduct(token, productId));
         }else{
             return ResponseEntity
                     .status(UNAUTHORIZED)
@@ -56,12 +54,12 @@ public class CartController {
         }
     }
 
-    @DeleteMapping(value = "/carts/user/{userId}/clear")
-    public ResponseEntity<Cart> clearCart(@PathVariable Long userId,@RequestParam(value = "token") String token) {
+    @DeleteMapping(value = "/carts/clear")
+    public ResponseEntity<Cart> clearCart(@RequestParam(value = "token") String token) {
         if(authenticate.Authenticate(token)) {
             return ResponseEntity
                     .ok()
-                    .body(cartService.clearCart(userId));
+                    .body(cartService.clearCart(token));
         }else{
             return ResponseEntity
                     .status(UNAUTHORIZED)

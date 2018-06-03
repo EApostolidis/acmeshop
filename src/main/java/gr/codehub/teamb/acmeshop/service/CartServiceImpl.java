@@ -49,8 +49,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart addProduct(Long userId, Long productId , int quantity) {
-        Cart cart = getCartByUser(userId);
+    public Cart addProduct(String token, Long productId , int quantity) {
+        User user = userRepository.findUserByToken(token);
+        Cart cart = getCartByUser(user.getId());
         Product product = productRepository.findProductById(productId);
         product.setQuantity(quantity);
         Stock stock = stockRepository.getStockByProductId(productId);
@@ -77,8 +78,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart removeProduct(Long userId, Long productId) {
-        Cart cart = getCartByUser(userId);
+    public Cart removeProduct(String token, Long productId) {
+        User user = userRepository.findUserByToken(token);
+        Cart cart = getCartByUser(user.getId());
         Product product = productRepository.findProductById(productId);
         cart.getProducts().remove(product);
         log.info("Product  removed");
@@ -86,9 +88,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart clearCart(Long userId) {
-        Cart cart = getCartByUser(userId);
+    public Cart clearCart(String token) {
+        User user = userRepository.findUserByToken(token);
+        Cart cart = getCartByUser(user.getId());
         cart.getProducts().clear();
-        return cartRepository.findCartByUser(userRepository.findUserById(userId));
+        return cartRepository.findCartByUser(userRepository.findUserById(user.getId()));
     }
 }

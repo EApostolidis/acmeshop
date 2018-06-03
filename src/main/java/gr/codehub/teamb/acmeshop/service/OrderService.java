@@ -8,6 +8,6 @@ import java.util.Set;
 
 @Service
 public interface OrderService {
-    Order confirmOrder(Long userId);
+    Order confirmOrder(String token);
     Set<Order> getUserOrders(Long id);
 }

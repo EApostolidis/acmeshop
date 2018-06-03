@@ -5,6 +5,7 @@ import gr.codehub.teamb.acmeshop.domain.Order;
 import gr.codehub.teamb.acmeshop.domain.Product;
 import gr.codehub.teamb.acmeshop.domain.User;
 import gr.codehub.teamb.acmeshop.repository.OrderRepository;
+import gr.codehub.teamb.acmeshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -29,16 +33,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Order confirmOrder(Long userId) {
-        Cart cart = cartService.getCartByUser(userId);
-        User user =  userService.getUserById(userId);
+    public Order confirmOrder(String token) {
+        User user =  userRepository.findUserByToken(token);
+        Cart cart = cartService.getCartByUser(user.getId());
         Order order = new Order();
         order.setUser(user);
         Set<Product> productSet = new HashSet<>();
         productSet.addAll(cart.getProducts());
         order.setProducts(productSet);
         orderRepository.save(order);
-        cartService.clearCart(userId);
+        cartService.clearCart(token);
         log.info("order " + order + "has been saved ");
         return order;
     }

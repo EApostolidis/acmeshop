@@ -35,11 +35,11 @@ public class ProductController {
                 .body(productService.getProductsByCategory(categoryId));
     }
 
-    @PostMapping("/products/{categoryId}")
+    @PostMapping("/products/category/{categoryId}")
     public ResponseEntity<Product> addProduct(@RequestBody Product product,
                                               @PathVariable Long categoryId,
                                               @RequestParam(value = "token") String token) {
-        if(authenticate.Authenticate(token)){
+        if(authenticate.Authenticate(token) && authenticate.Authorize(token)){
             return ResponseEntity
                     .ok()
                     .body(productService.createProduct(product,categoryId));
