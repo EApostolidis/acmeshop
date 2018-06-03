@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getProductsByText(String text);
-
-    Product addProduct(Product product);
-
-    List<Product> getProductsByCategoryId(Long id);
-
-    Product findProductById(Long id);
+    List<Product> getProductsByCategory(Long categoryId);
+    Product createProduct(Product product,Long categoryId);
 }

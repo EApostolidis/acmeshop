@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
+    static Logger log = Logger.getLogger(CategoryServiceImpl.class.getName());
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -19,7 +22,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCatgoryById(Long id) {
-        return  categoryRepository.getCategoriesById(id);
+    public Category getCategoryById(Long id) {
+        return  categoryRepository.findCategoryById(id);
+    }
+
+    @Override
+    public Category addCategory(Category category) {
+        categoryRepository.save(category);
+        log.info("Category saved :" + category);
+        return category;
     }
 }

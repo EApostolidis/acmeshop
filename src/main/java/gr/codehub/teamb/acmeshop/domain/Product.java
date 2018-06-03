@@ -1,39 +1,80 @@
 package gr.codehub.teamb.acmeshop.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "PRODUCTS")
-public class Product implements Serializable {
-
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PROD_ID")
     private long id;
-
     private String name;
-
-    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @OneToOne(mappedBy = "product",fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy = "products")
     @JsonIgnore
-    private Stock stock;
+    private Set<Cart> carts;
 
-    @ManyToMany(mappedBy="products",fetch=FetchType.LAZY)
     @JsonIgnore
-    private List<Order> orders;
+    @ManyToMany(mappedBy = "products")
+    private Set<Order> orders;
+
+    private int quantity;
+
+
+    public Product() {
+    }
+
+    public Product(String name, Category category, Set<Cart> carts) {
+        this.name = name;
+        this.category = category;
+        this.carts = carts;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
