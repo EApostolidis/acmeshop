@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import static com.sun.webkit.perf.WCFontPerfLogger.log;
-
 @Service
 public class CartServiceImpl implements CartService {
 
